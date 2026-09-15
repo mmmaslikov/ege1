@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ЕГЭ Информатика — Задание 1. Анализ информационных моделей</title>
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f5f5f7;
+  --bg-card: #ffffff;
+  --text: #1d1d1f;
+  --text-soft: #515154;
+  --text-muted: #86868b;
+  --border: #d2d2d7;
+  --border-soft: #e8e8ed;
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-soft: #e8f4fd;
+  --success: #34c759;
+  --success-soft: #eafaf1;
+  --error: #ff3b30;
+  --error-soft: #fff0ef;
+  --warning: #ff9500;
+  --warning-soft: #fff8eb;
+  --radius: 16px;
+  --radius-sm: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg-soft);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body { padding: 16px; }
+
+.container { max-width: 1000px; margin: 0 auto; }
+
+.header {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-soft);
+}
+
+.header-title {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.header-sub {
+  color: var(--text-soft);
+  font-size: 15px;
+}
+
+.header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.header-meta span { display: flex; align-items: center; gap: 6px; }
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-card);
+  padding: 8px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-soft);
+  overflow-x: auto;
+}
+
+.tab {
+  flex: 1;
+  min-width: 140px;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.tab:hover { background: var(--bg-soft); color: var(--text); }
+.tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tab.active { background: var(--accent); color: white; box-shadow: var(--shadow-sm); }
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 26px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-soft);
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.card-subtitle {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 22px 0 12px;
+  color: var(--text);
+}
+
+h3 { font-size: 17px; font-weight: 600; margin: 20px 0 10px; color: var(--text); }
+p { margin-bottom: 12px; color: var(--text-soft); }
+p:last-child { margin-bottom: 0; }
+ul, ol { margin: 10px 0 14px 24px; color: var(--text-soft); }
+li { margin-bottom: 6px; }
+strong { color: var(--text); font-weight: 600; }
+
+.note {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--text);
+}
+.note-warn { background: var(--warning-soft); border-left-color: var(--warning); }
+.note-success { background: var(--success-soft); border-left-color: var(--success); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-height: 44px;
+  min-width: 44px;
+}
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-secondary { background: var(--bg-soft); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--border-soft); }
+.btn-block { width: 100%; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+.task {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.task-num {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.task-link {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.task-link:hover { color: var(--accent); background: var(--accent-soft); }
+
+.task-text {
+  color: var(--text);
+  font-size: 15px;
+  margin-bottom: 14px;
+  line-height: 1.65;
+}
+
+.task-visual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 14px 0;
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .task-visual { grid-template-columns: 1fr; }
+  .header-title { font-size: 24px; }
+}
+
+.adj-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.adj-table th, .adj-table td {
+  border: 1px solid var(--border);
+  padding: 7px 8px;
+  text-align: center;
+  min-width: 34px;
+}
+
+.adj-table th {
+  background: var(--bg-soft);
+  font-weight: 600;
+  color: var(--text);
+  font-size: 12px;
+}
+
+.adj-table td.marked {
+  background: #ffffff;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.adj-table td.empty-cell {
+  background: #f5f5f7;
+  color: transparent;
+}
+
+.graph-container {
+  background: var(--bg-soft);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+  border: 1px solid var(--border-soft);
+}
+
+.graph-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.input-group { margin-top: 14px; }
+
+.input-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: inherit;
+  background: var(--bg-card);
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  min-height: 44px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.input.correct { border-color: var(--success); background: var(--success-soft); }
+.input.wrong { border-color: var(--error); background: var(--error-soft); }
+
+.feedback {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  display: none;
+}
+.feedback.show { display: block; }
+.feedback.success { background: var(--success-soft); color: #1b7a3d; border: 1px solid #b7ebc9; }
+.feedback.error { background: var(--error-soft); color: #c41e14; border: 1px solid #f5c6c2; }
+
+.solution {
+  margin-top: 12px;
+  padding: 16px 18px;
+  background: var(--bg-soft);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+  font-size: 14px;
+  line-height: 1.7;
+  display: none;
+}
+.solution.show { display: block; }
+.solution-title { font-weight: 600; margin-bottom: 8px; color: var(--text); }
+
+.results-panel {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-top: 20px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow);
+  display: none;
+}
+.results-panel.show { display: block; }
+
+.results-score {
+  text-align: center;
+  padding: 22px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+.results-score-num { font-size: 52px; font-weight: 700; color: var(--accent); line-height: 1; }
+.results-score-label { font-size: 14px; color: var(--text-soft); margin-top: 6px; }
+
+.progress-bar {
+  height: 6px;
+  background: var(--border-soft);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+
+.result-item {
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+.result-item.correct { background: var(--success-soft); border-color: #b7ebc9; }
+.result-item.wrong { background: var(--error-soft); border-color: #f5c6c2; }
+
+.result-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.result-item-num { font-weight: 600; color: var(--text); }
+.result-item-status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+.result-item-status.correct { background: var(--success); color: white; }
+.result-item-status.wrong { background: var(--error); color: white; }
+
+.result-item-answers { font-size: 13px; color: var(--text-soft); }
+.result-item-answers strong { color: var(--text); }
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 20px;
+}
+.footer a { color: var(--accent); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+.hidden { display: none !important; }
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.section-title { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+.section-desc { font-size: 14px; color: var(--text-muted); }
+
+.example {
+  background: var(--bg-soft);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  margin: 14px 0;
+  border: 1px solid var(--border-soft);
+}
+.example-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.type-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.type-badge.numbers { background: #e0f2fe; color: #0369a1; }
+.type-badge.stars { background: #fef3c7; color: #92400e; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="header">
+    <h1 class="header-title">Задание 1. Анализ информационных моделей</h1>
+    <p class="header-sub">Подготовка к ЕГЭ по информатике · 11 класс</p>
+    <div class="header-meta">
+      <span>👨‍🏫 Учитель: Масликов М.М.</span>
+      <span>⏱ Время: 2 урока (80 мин)</span>
+      <span> 20 заданий</span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="theory" role="tab" aria-selected="true">📖 Теория</button>
+    <button class="tab" data-tab="practice1" role="tab" aria-selected="false">⚡ Практика 1 (сразу)</button>
+    <button class="tab" data-tab="practice2" role="tab" aria-selected="false">📝 Практика 2 (в конце)</button>
+  </nav>
+
+  <main id="app"></main>
+
+  <footer class="footer">
+    <p>Практические задания оформлены по материалам <a href="https://inf-ege.sdamgia.ru" target="_blank" rel="noopener">Решу ЕГЭ (Сдам ГИА)</a></p>
+    <p style="margin-top:6px;">© 2026 · Учебный материал для подготовки к ЕГЭ</p>
+  </footer>
+</div>
+
+<script>
+/* =========================================================
+   ДАННЫЕ: 20 заданий из варианта № 20874519
+   ========================================================= */
+
+const TASKS = [
+  {
+    id: 1,
+    num: 13399,
+    type: 'numbers',
+    text: 'На рисунке схема дорог Н-ского района изображена в виде графа, в таблице содержатся сведения о длине этих дорог в километрах. Так как таблицу и схему рисовали независимо друг от друга, то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите длину дороги из пункта Б в пункт Е. В ответе запишите целое число. ВНИМАНИЕ! Длины отрезков на схеме не отражают длины дорог.',
+    svg: 'images/1_13399.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,10,null,null,null,12,null],
+      [10,null,null,null,null,null,8],
+      [null,null,null,null,11,15,null],
+      [null,null,null,null,null,5,null],
+      [null,null,11,null,null,null,13],
+      [null,null,15,5,13,null,null],
+      [12,8,null,null,6,null,null]
+    ],
+    answer: '13',
+    solution: '1. Из В идет единственная дорога, значит, В соответствует П4.\n2. Единственная дорога из В идет в Б, а так как единственная дорога из П4 идет в П6, значит, Б соответствует П6.\n3. К — единственная вершина, имеющая два ребра и ведущая при этом в Б, значит, П3 соответствует К.\n4. Е — единственная вершина, имеющая ребро с Б и К, значит, Е соответствует П5.\nТогда ответ — дорога из П5 в П6, которая равна 13.\nОтвет: 13.'
+  },
+  {
+    id: 2,
+    num: 73856,
+    type: 'numbers',
+    text: 'На рисунке схема дорог изображена в виде графа, в таблице содержатся сведения о длине этих дорог в километрах. Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Известно, что дорога АГ длиннее дороги ГД. Определите длину дороги ЖИ.',
+    svg: 'images/2_73827-73856.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7','П8','П9'],
+    table: [
+      [null,20,null,24,31,null,null,null,19],
+      [20,null,null,null,null,13,null,null,null],
+      [null,null,null,23,26,null,21,null,25],
+      [24,null,23,null,null,null,null,22,null],
+      [31,null,26,null,null,15,null,null,null],
+      [null,13,null,null,15,null,null,null,null],
+      [null,null,21,null,null,null,null,16,null],
+      [null,null,null,22,null,null,16,null,null],
+      [19,null,25,null,null,null,null,null,null]
+    ],
+    answer: '22',
+    solution: 'Так как населенный пункт Д единственный пункт степени 2, имеющий общие дороги с двумя пунктами степени 4 (Г и Е), то это пункт П9. Тогда дорога А-Г может быть или П2-П1 (длина 20) или П7-П3 (длина 21). А дорога Г-Д может быть или П1-П9 (длина 19) или П3-П9 (длина 25). Так как, по условию задачи, дорога АГ длиннее дороги ГД, следовательно, населенный пункт Г это пункт П1, а населенный пункт А это пункт П2. Населенный пункт Б это пункт П6, а населенный пункт В это П5. Тогда, населенный пункт Ж это пункт П4, а населенный пункт И это пункт П8. Длина дороги П4-П8 равна 22.\nОтвет: 22.'
+  },
+  {
+    id: 3,
+    num: 13349,
+    type: 'numbers',
+    text: 'На рисунке справа схема дорог Н-ского района изображена в виде графа; в таблице слева содержатся сведения о протяжённости каждой из этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите, какова протяжённость дороги из пункта Д в пункт Е. В ответе запишите целое число — так, как оно указано в таблице.',
+    svg: 'images/3_13349.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,20,null,15,10,8,9],
+      [20,null,null,11,null,25,null],
+      [null,null,null,null,5,null,null],
+      [15,11,null,null,null,null,null],
+      [10,null,5,null,null,7,6],
+      [8,25,null,null,7,null,null],
+      [9,null,null,null,6,null,null]
+    ],
+    answer: '25',
+    solution: 'Сопоставим населённые пункты графа и населённые пункты в таблице.\nИз Ж ведут пять дорог. Только из пункта П1 ведут пять дорог.\nИз А ведёт одна дорога. Только из пункта П3 ведёт одна дорога.\nИз Б ведёт четыре дороги. Только из пункта П5 ведёт четыре дороги.\nИз В ведут две дороги: одна — в Ж, другая — в Б. Из пункта П7 также ведут две дороги: одна — в Ж, другая — в Б, следовательно, пункт П7 — это пункт В.\nИз пункта П4 ведут две дороги: одна — в Ж, другая — в пункт П2, на графе осталась только дорога Г, соответствующая данным условиям. Таким образом, пункт П4 — это пункт Г, а пункт П2 — это пункт Д.\nОстались только пункты Е и П6, значит, пункт Е и есть пункт П6.\nТаким образом, длина дороги из пункта Д в пункт Е равна 25.\nОтвет: 25.'
+  },
+  {
+    id: 4,
+    num: 68234,
+    type: 'numbers',
+    text: 'На рисунке схема дорог изображена в виде графа, в таблице указано время в пути (в минутах) по каждой дороге. Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите минимальное время перемещения по данным дорогам из пункта А в пункт Д. В ответе укажите целое число: минимальное время в минутах.',
+    svg: 'images/4_68263.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7','П8','П9'],
+    table: [
+      [null,34,null,32,null,null,null,null,null],
+      [34,null,null,31,null,50,null,26,null],
+      [null,null,null,39,37,null,null,null,null],
+      [32,31,39,null,null,null,null,null,41],
+      [null,null,37,null,null,null,21,null,44],
+      [null,50,null,null,null,null,null,35,23],
+      [null,null,null,null,21,null,null,null,20],
+      [null,26,null,null,null,35,null,null,null],
+      [null,null,null,41,44,23,20,null,null]
+    ],
+    answer: '78',
+    solution: 'Заметим, что в таблице имеются четыре населённых пункта степени 2, два населённых пункта степени 3 и три населённых пункта степени 4.\nНаселённый пункт Ж — единственный пункт степени 2, который обе дороги имеет с пунктами степени 4. Ему соответствует пункт П1.\nИз двух пунктов степени 3 только пункт Б имеет дороги с двумя пунктами степени 2, это пункт Б, и ему соответствует пункт П5. Следовательно, населённому пункту Е соответствует пункт П6.\nПоскольку Е имеет дорогу с пунктом К, то пункту К соответствует населённый пункт П8. Тогда населённый пункт И соответствует пункту П2. Пункт Г связан с пунктами Ж (П1) и И (П2), следовательно, это населённый пункт П4. Тогда населённый пункт Д — это пункт П9.\nПункт А имеет общие дороги с пунктами Г (П4) и Б (П5), следовательно, это пункт П3. Следовательно, населённый пункт В соответствует пункту П7.\nПоскольку требуется найти кратчайшую (по времени) дорогу из пункта А в пункт Д, рассмотрим варианты маршрута.\n1. Дорога А–Б–Д, или П3–П5–П9, время в пути 37 + 44 = 81 (мин.).\n2. Дорога А–Г–Д, или П3–П4–П9, время в пути 39 + 41 = 80 (мин.).\n3. Дорога А–Б–В–Д, или П3–П5–П7–П9, время в пути 37 + 21 + 20 = 78 (мин.).\n4. Дорога А–Г–И–Е–Д, или П3–П4–П2–П6–П9, время в пути 39 + 31 + 50 + 23 = 148 (мин.).\nОстальные маршруты больше по времени.\nМинимальное время перемещения по дорогам из пункта А в пункт Д составляет 78 минут.\nОтвет: 78.'
+  },
+  {
+    id: 5,
+    num: 83159,
+    type: 'numbers',
+    text: 'На рисунке схема дорог N-ского района изображена в виде графа, в таблице содержатся сведения о протяжённости каждой из этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите, какова сумма протяжённостей дорог из пункта E в пункт D и из пункта C в пункт A. В ответе запишите целое число.',
+    svg: 'images/5_83131.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,null,null,null,null,17,23],
+      [null,null,7,null,20,3,null],
+      [null,7,null,88,null,null,1],
+      [null,null,88,null,13,null,null],
+      [null,20,null,13,null,11,null],
+      [17,3,null,null,11,null,null],
+      [23,null,1,null,null,null,null]
+    ],
+    answer: '14',
+    solution: 'Заметим, что F — единственная вершина степени 3, не имеющая общих дорог с вершинами степени 2. Следовательно, F соответствует пункту П2.\nПункт A — единственная вершина степени 2, не имеющая общих дорог с вершинами степени 2. Следовательно, A соответствует пункту П4.\nПункт G — единственная вершина степени 3 (кроме уже известной вершины F), не имеющая общих дорог с вершиной A степени 2. Следовательно, G соответствует пункту П6. Тогда пункт B это пункт П1, а пункт D это пункт П7.\nС пунктом П7 связан на вершине E, и ей соответствует пункт П3. Тогда вершина А это пункт П5.\nЗначит, сумма протяжённостей дорог из пункта Е в пункт D (дорога П3–П7) и из пункта C в пункт A (дорога П5-П4) равна 1 + 13 = 14.\nОтвет: 14.'
+  },
+  {
+    id: 6,
+    num: 87392,
+    type: 'numbers',
+    text: 'На рисунке схема дорог N-ского района изображена в виде графа, в таблице содержатся сведения о протяжённости каждой из этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите, какова сумма протяжённостей всех дорог из пункта A в остальные пункты. В ответе запишите целое число.',
+    svg: 'images/6_87392.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,null,21,null,14,null,12],
+      [null,null,22,11,null,null,43],
+      [21,22,null,null,13,10,18],
+      [null,11,null,null,null,24,null],
+      [14,null,13,null,null,null,null],
+      [null,null,10,24,null,null,null],
+      [12,43,18,null,null,null,null]
+    ],
+    answer: '76',
+    solution: 'Пункт D — единственная вершина степени 5, следовательно, это пункт П3.\nЗаметим, что В — единственная вершина степени 2, не имеющая общих дорог с пунктом D. Следовательно, В соответствует пункту П4. Тогда пункт С это пункт П6, а пункт А это пункт П2.\nСумма протяжённостей всех дорог из пункта A в остальные пункты равна 22+11+43 = 76.\nОтвет: 76.'
+  },
+  {
+    id: 7,
+    num: 10306,
+    type: 'numbers',
+    text: 'На рисунке схема дорог Н-ского района изображена в виде графа, в таблице содержатся сведения о длинах этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите длину дороги из пункта Б в пункт Д. В ответе запишите целое число.',
+    svg: 'images/7_10279.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,40,null,15,null,null,null],
+      [40,null,null,35,null,48,null],
+      [null,null,null,null,10,65,11],
+      [15,35,null,null,null,22,33],
+      [null,null,10,null,null,50,null],
+      [null,48,65,22,50,null,40],
+      [null,null,11,33,null,40,null]
+    ],
+    answer: '11',
+    solution: 'Есть только один пункт, из которого ведёт 5 дорог, — это В, а в таблице — П6.\nИз А ведёт две дороги, и одна из них — в В. В таблице такому соответствует П5.\nИз Б ведёт три дороги, причём есть дороги в А и в В, в таблице под такое подходит только П3.\nИз Д три дороги, две из которых — в Б и в В, в таблице только один пункт такому соответствует — П7.\nТаким образом, Б — это П3, а Д — П7. Длина дороги между П3 и П7 — 11.\nОтвет: 11.'
+  },
+  {
+    id: 8,
+    num: 68502,
+    type: 'stars',
+    text: 'На рисунке слева изображена схема дорог N-ского района. В таблице звёздочкой обозначено наличие дороги из одного населённого пункта в другой. Отсутствие звёздочки означает, что такой дороги нет. Каждому населённому пункту на схеме соответствует его номер в таблице, но не известно, какой именно номер. Определите, какие номера населённых пунктов в таблице могут соответствовать населённым пунктам B и E на схеме. В ответе запишите эти два номера в возрастающем порядке без пробелов и знаков препинания.',
+    svg: 'images/8_68502.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,null,null,'*',null,null,'*'],
+      [null,null,null,null,null,'*',null,'*'],
+      [null,'*',null,null,'*',null,null,'*'],
+      [null,null,'*',null,null,null,null,'*'],
+      [null,null,'*',null,null,'*',null,null],
+      [null,null,null,null,null,'*',null,'*'],
+      [null,'*',null,'*','*','*','*',null]
+    ],
+    answer: '26',
+    solution: 'На схеме имеется один населённый пункт D степени 5, ему соответствует населённый пункт П7.\nТакже есть только один населённый пункт степени 3, это пункт А, и ему соответствует пункт П3. С населённым пунктом А имеют общие дороги пункты степени 2, это C и G, им могут соответствовать пункты П4 или П1 (мы не знаем, какой пункт какому соответствует, но для решения это и не нужно).\nПункт F — единственный оставшийся населённый пункт степени 2, не имеющий общих дорог с пунктом D (пункт П7), ему соответствует пункт П5.\nТогда населённым пунктам B и E могут соответствовать только пункты П2 и П6. Это и есть ответ. Записываем ответ в порядке возрастания без разделителей.\nОтвет: 26.'
+  },
+  {
+    id: 9,
+    num: 27532,
+    type: 'stars',
+    text: 'На рисунке схема дорог изображена в виде графа, в таблице звёздочками обозначено наличие дороги между населёнными пунктами. Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Укажите номера, которые могут соответствовать пунктам Г и Д. В ответе запишите эти номера в порядке возрастания без пробелов и знаков препинания.',
+    svg: 'images/9_27532.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7','П8','П9'],
+    table: [
+      [null,null,null,null,'*','*',null,null,null],
+      [null,null,null,null,null,'*','*','*','*'],
+      [null,null,null,null,'*',null,'*','*',null],
+      [null,null,null,null,null,null,null,'*','*'],
+      ['*',null,'*',null,null,null,null,'*',null],
+      ['*','*',null,null,null,null,'*',null,null],
+      [null,'*','*',null,null,'*',null,null,null],
+      [null,null,'*','*','*',null,null,null,null],
+      [null,'*',null,'*',null,null,null,null,null]
+    ],
+    answer: '37',
+    solution: 'Вершина Б — единственная вершина степени 2, из которой идут дороги только к вершинам степени 3 — это А и В. Значит, Б соответствует П1, А и В — П5 и П6.\nВершина Ж и И — единственные вершины степени 2, из которых идут дороги к вершинам степени 2 и к вершинам степени 3. Значит, И и Ж соответствуют П4 и П9, а Е и К — П2 и П8.\nСледовательно, Г и Д соответствуют П3 и П7.\nОтвет: 37.'
+  },
+  {
+    id: 10,
+    num: 9753,
+    type: 'numbers',
+    text: 'На рисунке справа схема дорог Н-ского района изображена в виде графа, в таблице содержатся сведения о длинах этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите, какова длина дороги из пункта Г в пункт Е. В ответе запишите целое число — так, как оно указано в таблице.',
+    svg: 'images/10_9354.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,45,null,10,null,null,null],
+      [45,null,null,40,null,55,null],
+      [null,null,null,null,15,60,null],
+      [10,40,null,null,null,20,35],
+      [null,null,15,null,null,55,null],
+      [null,55,60,20,55,null,45],
+      [null,null,null,35,null,45,null]
+    ],
+    answer: '40',
+    solution: 'Пункт Г — единственный пункт с тремя дорогами, значит, ему соответствует П2, а пункт Е — единственный с четырьмя дорогами, значит, ему соответствует П4.\nДлина дороги из П2 в П4 равна 40.\nОтвет: 40.'
+  },
+  {
+    id: 11,
+    num: 58509,
+    type: 'stars',
+    text: 'На рисунке схема дорог изображена в виде графа, в таблице звёздочками обозначено наличие дороги между населёнными пунктами. Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Выпишите последовательно без пробелов и знаков препинания указанные на графе буквенные обозначения пунктов от П1 до П8: сначала букву, соответствующую П1, затем букву, соответствующую П2, и т. д.',
+    svg: 'images/11_58468.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7','П8'],
+    table: [
+      [null,'*',null,null,'*',null,null,null],
+      ['*',null,'*',null,'*',null,null,null],
+      [null,'*',null,null,null,'*','*','*'],
+      [null,null,null,null,null,'*','*',null],
+      ['*','*',null,null,null,null,null,'*'],
+      [null,null,'*','*',null,null,'*','*'],
+      [null,null,'*','*',null,'*',null,null],
+      [null,null,'*',null,'*','*',null,null]
+    ],
+    answer: 'ДЕЖАГБИВ',
+    solution: 'Заметим, что в таблице имеется два пункта степени 2. Населённый пункт А имеет дороги с населёнными пунктами степени 3 и 4, а населённый пункт Д имеет дороги с двумя населёнными пунктами степени 3. Следовательно, населённому пункту А соответствует пункт П4, а населённому пункту Д — пункт П1.\nПоскольку населённый пункт А граничит с пунктами степени 3 и 4, то населённый пункт Б — это пункт П6, а населённый пункт И — это пункт П7.\nПоскольку населённый пункт И (пункт П7) граничит с А (пункт П4), Б (пункт П6) и Ж, то населённый пункт Ж — это пункт П3.\nПоскольку населённый пункт Б (пункт П6) граничит с А (пункт П4), И (пункт П7), Ж (пункт П3) и В, то населённый пункт В — это пункт П8.\nПоскольку населённый пункт В (пункт П8) граничит с Б (пункт П6), Ж (пункт П3) и Г, то населённый пункт Г — это пункт П5. Тогда населённый пункт Е — это П2.\nВыпишем последовательно без пробелов и знаков препинания указанные на графе буквенные обозначения пунктов от П1 до П8: ДЕЖАГБИВ.\nОтвет: ДЕЖАГБИВ.'
+  },
+  {
+    id: 12,
+    num: 92178,
+    type: 'numbers',
+    text: 'На рисунке схема дорог N-ского района изображена в виде графа, в таблице содержатся сведения о протяжённости каждой из этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите, какова протяжённость дороги из пункта F в пункт G и из пункта B в пункт C. В ответе запишите целое число.',
+    svg: 'images/12_92178.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7','П8'],
+    table: [
+      [null,13,2,5,null,null,null,null],
+      [13,null,null,74,null,null,null,39],
+      [2,null,null,null,null,null,null,1],
+      [5,74,null,null,null,null,8,null],
+      [null,null,null,null,null,21,30,null],
+      [null,null,null,null,21,null,53,3],
+      [null,null,null,8,30,53,null,null],
+      [null,39,1,null,null,3,null,null]
+    ],
+    answer: '23',
+    solution: 'Населённые пункты Е и Н не имеют общих дорог с пунктами степени 2, следовательно, это пункты П2 и П4 (пока не знаем, кто какой пункт).\nНаселённый пункт В единственный пункт степени 3, который имеет общие дороги с пунктами Е и Н, тогда это пункт П1.\nС пунктом В имеет общую дорогу пункт С, степени 2, тогда пункт С это пункт П3.\nТак как пункт D имеет общую дорогу с пунктом С, тогда это пункт П8.\nПункт П8 (пункт D) имеет общую дорогу с пунктами С (пункт П3), пунктом Е (пункт П2 или П4) и пунктом G. Тогда населённый пункт G это пункт П6, а населённый пункт F это пункт П5.\nПротяжённость дороги из пункта F в пункт G это длина дороги П5-П6 равная 21.\nПротяжённость дороги из пункта B в пункт C это длина дороги П1-П3 равная 2.\nПротяжённость дороги из пункта F в пункт G и из пункта B в пункт C равна 21+2 = 23.\nОтвет: 23.'
+  },
+  {
+    id: 13,
+    num: 13587,
+    type: 'numbers',
+    text: 'На рисунке схема дорог Н-ского района изображена в виде графа, в таблице содержатся сведения о длине этих дорог в километрах. Так как таблицу и схему рисовали независимо друг от друга, то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите длину дороги из пункта Г в пункт Д. В ответе запишите целое число. ВНИМАНИЕ! Длины отрезков на схеме не отражают длины дорог.',
+    svg: 'images/13_13587.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,null,15,null,null,null,20],
+      [null,null,null,null,null,22,18],
+      [15,null,null,null,null,null,10],
+      [null,null,null,null,9,8,null],
+      [null,null,null,9,null,null,12],
+      [null,22,null,8,null,null,14],
+      [20,18,10,null,12,14,null]
+    ],
+    answer: '12',
+    solution: '1. Г — единственная вершина, степень которой 5, значит, Г соответствует П7.\n2. А — единственная вершина, степень которой 3, значит, А соответствует П6.\n3. В — единственная вершина, имеющая ребро в А и в Г одновременно, значит, В — это П2.\n4. Методом исключения найдём вершину Б — это П4 (это третья вершина из А).\n5. Тогда Д — единственная вершина, имеющая ребро в Г и Б, степень которой 2, значит, Д — это П5.\nТогда ответ — дорога из П7 в П5, ее длина равна 12.\nОтвет: 12.'
+  },
+  {
+    id: 14,
+    num: 76104,
+    type: 'stars',
+    text: 'На рисунке справа схема дорог Н-ского района изображена в виде графа, звёздочка в ячейке таблицы обозначает наличие дороги между двумя пунктами. Так как таблицу и схему рисовали независимо друг от друга, то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Выпишите последовательно без пробелов и знаков препинания, указанные на графе буквенные обозначения пунктов от П1 до П8: сначала букву, соответствующую П1, затем букву, соответствующую П2, и т. д.',
+    svg: 'images/14_76104.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7','П8'],
+    table: [
+      [null,null,null,null,null,'*','*','*'],
+      [null,null,'*','*',null,null,null,null],
+      [null,'*',null,'*',null,'*','*',null],
+      [null,'*','*',null,'*',null,null,null],
+      [null,null,null,'*',null,'*',null,null],
+      ['*',null,'*',null,'*',null,null,null],
+      ['*',null,'*',null,null,null,null,'*'],
+      ['*',null,null,null,null,null,'*',null]
+    ],
+    answer: 'ЖБГАВЕДИ',
+    solution: 'Сопоставим населённые пункты графа и населённые пункты в таблице.\nИз Г ведут четыре дороги. Таким образом, Г — П3. Тогда Б это пункт П2.\nПункт А связан с Б и Г и это населённый пункт П4. Тогда пункт В это П5, а пункт И это населённый пункт П8.\nПункт Е связан с В и Г и это пункт П6. Тогда Ж это пункт П1, а Д это населённый пункт П7.\nЗапишем ответ без пробелов и знаков препинания, указанные на графе буквенные обозначения пунктов от П1 до П8: ЖБГАВЕДИ.\nОтвет: ЖБГАВЕДИ.'
+  },
+  {
+    id: 15,
+    num: 47205,
+    type: 'numbers',
+    text: 'На рисунке схема дорог Н-ского района изображена в виде графа, в таблице содержатся сведения о протяжённости каждой из этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите, какова сумма протяжённостей дорог из пункта D в пункт B и из пункта F в пункт A. В ответе запишите целое число.',
+    svg: 'images/15_побочный.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,39,3,null,null,null,null],
+      [39,null,null,8,5,null,null],
+      [3,null,null,null,null,2,null],
+      [null,8,null,null,null,null,53],
+      [null,5,null,null,null,21,30],
+      [null,null,2,null,21,null,13],
+      [null,null,null,53,30,13,null]
+    ],
+    answer: '58',
+    solution: 'Заметим, что B — единственная вершина степени 2, не связанная с другими вершинами степени 2. Значит, вершина B соответствует П4.\nВершина F — единственная вершина степени 3, связанная с двумя вершинами степени 2. Следовательно, вершина F соответствует П2.\nВершина B связана только с вершинами F и D, значит, вершина D соответствует П7.\nВершина A — единственная вершина степени 3, связанная и с вершиной D, и с вершиной F. Следовательно, вершина A соответствует П5.\nТогда сумма протяжённостей дорог из пункта D в пункт B и из пункта F в пункт A равна 53 + 5 = 58.\nОтвет: 58.'
+  },
+  {
+    id: 16,
+    num: 72559,
+    type: 'stars',
+    text: 'На рисунке схема дорог изображена в виде графа, в таблице звёздочками обозначено наличие дороги между населёнными пунктами. Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Выпишите последовательно без пробелов и знаков препинания указанные на графе буквенные обозначения пунктов от П1 до П9: сначала букву, соответствующую П1, затем букву, соответствующую П2, и т. д.',
+    svg: 'images/16_72586-72559.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7','П8','П9'],
+    table: [
+      [null,null,null,null,null,null,null,null,null],
+      [null,null,null,null,null,null,null,null,null],
+      [null,null,null,null,null,null,null,null,null],
+      [null,null,null,null,null,'*','*','*','*'],
+      [null,null,null,null,null,null,null,null,null],
+      [null,null,null,null,null,null,null,null,null],
+      [null,null,null,null,null,null,null,null,null],
+      [null,null,null,null,null,null,null,null,null],
+      [null,null,null,null,null,null,null,null,null]
+    ],
+    answer: 'ЕВЖИГДБАК',
+    solution: 'На графе два населённых пункта степени 4 (пункты Д и И). Только пункт И имеет общие дороги с пунктом степени 2 (пунктом К). Тогда пункт И это пункт П4, а пункт Д это пункт П6.\nТак как с пунктом И имеет общую дорогу пункт К, то это пункт П9. Тогда Е это пункт П1, а В это пункт П2.\nС пунктом В связан пункт Б, это населённый пункт П7.\nОстался последний не распределённый пункт степени 2, это пункт Г, ему соответствует населённый пункт П5.\nПункт А имеет общие дороги с пунктами Г (П5) и Б (П7), ему соответствует пункт П8. Тогда Ж это пункт П3.\nВыпишем все населённые пункты по порядку. Получаем: ЕВЖИГДБАК.\nОтвет: ЕВЖИГДБАК.'
+  },
+  {
+    id: 17,
+    num: 60243,
+    type: 'stars',
+    text: 'На рисунке схема дорог Н-ского района изображена в виде графа. В таблице звёздочкой обозначено наличие дороги из одного населённого пункта в другой. Отсутствие звёздочки означает, что такой дороги нет. Каждому населённому пункту на схеме соответствует номер в таблице, но не известно, какой именно номер. Определите, какие номера в таблице могут соответствовать населённым пунктам E и F на схеме. В ответе запишите эти два номера в возрастающем порядке без пробелов и знаков препинания.',
+    svg: 'images/17_60243.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,'*','*','*','*','*','*'],
+      ['*',null,null,null,null,null,'*'],
+      ['*',null,null,null,'*',null,'*'],
+      ['*',null,null,null,'*','*',null],
+      ['*',null,'*','*',null,null,null],
+      ['*',null,null,'*',null,null,null],
+      ['*','*','*',null,null,null,null]
+    ],
+    answer: '35',
+    solution: 'Пункт C является единственным пунктом, из которого выходит 6 дорог, значит, П1 — это C.\nП2 и П6 — единственные пункты, содержащие две дороги, значит, П2 — это либо A, либо B, П6 — тоже либо A, либо B.\nЗаметим, что схема симметричная, по этому не важно, какой пункт мы примем за A, а какой — за B.\nПусть П2 — A, тогда П7 — G и П3 — F. Значит, П6 — B, П4 — D и П5 — E.\nТаким образом, получим, что пунктам E и F соответствуют номера 5, 3 или 3, 5.\nОтвет: 35.'
+  },
+  {
+    id: 18,
+    num: 18705,
+    type: 'numbers',
+    text: 'На рисунке справа схема дорог Н-ского района изображена в виде графа; в таблице слева содержатся сведения о протяжённости каждой из этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, то нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите, какова длина дороги из пункта Г в пункт Ж. В ответе запишите целое число — так, как оно указано в таблице.',
+    svg: 'images/18_18705.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,null,null,null,null,null,10],
+      [null,null,7,null,8,12,null],
+      [null,7,null,null,null,null,null],
+      [null,null,null,null,5,null,null],
+      [null,8,null,5,null,null,4],
+      [null,10,12,null,null,null,null],
+      [null,null,null,null,4,null,null]
+    ],
+    answer: '7',
+    solution: 'Заметим, что Е — единственная вершина степени 2. Значит, Е соответствует П6.\nВершина Г — единственная вершина степени 3, которая соединена с вершиной Е. Следовательно, Г соответствует П2.\nВершина Ж — единственная вершина степени 1, которая соединена с вершиной Г. Значит, вершина Ж соответствует П3.\nТаким образом, длина дороги из пункта Г в пункт Ж равна 7.\nОтвет: 7.'
+  },
+  {
+    id: 19,
+    num: 10377,
+    type: 'numbers',
+    text: 'На рисунке схема дорог Н-ского района изображена в виде графа, в таблице содержатся сведения о длинах этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите длину дороги из пункта А в пункт Г. В ответе запишите целое число.',
+    svg: 'images/19_10377.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,57,null,20,null,25,null],
+      [57,null,22,42,8,null,21],
+      [null,22,null,null,23,null,8],
+      [20,42,null,null,null,7,33],
+      [null,8,23,null,null,null,null],
+      [25,null,null,7,null,null,9],
+      [null,21,8,33,null,9,null]
+    ],
+    answer: '22',
+    solution: 'На карте есть только один пункт с 5 дорогами, это Г. В таблице же это П2.\nНа карте есть только один пункт с 2 дорогами, это Б. В таблице же это П5.\nА — пункт, из которого выходит 3 дороги, который связан и с Г, и с Б. Из всех пунктов в таблице только П3 под это подходит.\nТаким образом, Г = П2, А = П3. Длина дороги между П2 и П3 — 22.\nОтвет: 22.'
+  },
+  {
+    id: 20,
+    num: 87419,
+    type: 'numbers',
+    text: 'На рисунке схема дорог N-ского района изображена в виде графа, в таблице содержатся сведения о протяжённости каждой из этих дорог (в километрах). Так как таблицу и схему рисовали независимо друг от друга, нумерация населённых пунктов в таблице никак не связана с буквенными обозначениями на графе. Определите, какова сумма протяжённостей всех дорог из пункта G в остальные пункты. В ответе запишите целое число.',
+    svg: 'images/20_87392.svg',
+    tableLabels: ['П1','П2','П3','П4','П5','П6','П7'],
+    table: [
+      [null,null,21,null,14,null,12],
+      [null,null,22,11,null,null,43],
+      [21,22,null,null,13,10,18],
+      [null,11,null,null,null,24,null],
+      [14,null,13,null,null,null,null],
+      [null,null,10,24,null,null,null],
+      [12,43,18,null,null,null,null]
+    ],
+    answer: '47',
+    solution: 'Пункт D — единственная вершина степени 5, следовательно, это пункт П3.\nЗаметим, что В — единственная вершина степени 2, не имеющая общих дорог с пунктом D. Следовательно, В соответствует пункту П4. Тогда пункт С это пункт П6, а пункт А это пункт П2.\nПоследний пункт степени 2 это пункт Е, ему соответствует пункт П5. Тогда пункту G соответствует пункт П1.\nСумма протяжённостей всех дорог из пункта G в остальные пункты равна 21+14+12 = 47.\nОтвет: 47.'
+  }
+];
+
+
+/* =========================================================
+   СОСТОЯНИЕ
+   ========================================================= */
+const state = {
+  currentTab: 'theory',
+  answers1: {},
+  checked1: {},
+  showSolution1: {},
+  answers2: {},
+  results2: null
+};
+
+
+/* =========================================================
+   РЕНДЕРИНГ: ТЕОРИЯ
+   ========================================================= */
+function renderTheory() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+
+  const intro = document.createElement('section');
+  intro.className = 'card';
+  intro.innerHTML = `
+    <h2 class="card-title">Что такое информационная модель?</h2>
+    <p><strong>Информационная модель</strong> — это описание объекта или процесса в виде информации, отражающей его существенные свойства.</p>
+    <p>В задании 1 ЕГЭ вам встретятся два вида представления одной и той же информации о дорогах между населёнными пунктами:</p>
+    <ul>
+      <li><strong>Граф</strong> — схема, где вершины (кружочки) обозначают пункты, а рёбра (линии) — дороги между ними</li>
+      <li><strong>Таблица</strong> — матрица, где строки и столбцы обозначают пункты, а содержимое ячеек показывает наличие дороги и её характеристики</li>
+    </ul>
+    <div class="note">
+      <strong>Важно:</strong> таблица и граф рисуются <em>независимо</em>, поэтому нумерация пунктов в таблице (П1, П2, ...) не совпадает с буквенными обозначениями на графе (А, Б, В, ...). Ваша задача — установить соответствие.
+    </div>
+  `;
+  app.appendChild(intro);
+
+  const types = document.createElement('section');
+  types.className = 'card';
+  types.innerHTML = `
+    <h2 class="card-title">Типы заданий №1</h2>
+    <p>Все задания делятся на два больших типа:</p>
+    
+    <h3>📊 Тип А: Таблица с числами <span class="type-badge numbers">числа</span></h3>
+    <p>В ячейках таблицы указаны <strong>длины дорог</strong> (в км) или <strong>время в пути</strong> (в минутах). Пустые ячейки означают отсутствие прямой дороги.</p>
+    <p>В таких заданиях обычно просят:</p>
+    <ul>
+      <li>Найти длину конкретной дороги (например, из Б в Е)</li>
+      <li>Найти сумму длин нескольких дорог</li>
+      <li>Найти минимальное время/расстояние между двумя пунктами</li>
+      <li>Найти сумму всех дорог из одного пункта</li>
+    </ul>
+
+    <h3>⭐ Тип Б: Таблица со звёздочками <span class="type-badge stars">звёздочки</span></h3>
+    <p>В ячейках таблицы стоит <strong>звёздочка (*)</strong>, если дорога есть, и пусто, если дороги нет. Это таблица смежности графа.</p>
+    <p>В таких заданиях обычно просят:</p>
+    <ul>
+      <li>Выписать буквенные обозначения пунктов от П1 до Пn в правильном порядке</li>
+      <li>Указать номера пунктов, соответствующие определённым буквам</li>
+    </ul>
+
+    <div class="note note-warn">
+      <strong>Совет:</strong> независимо от типа задания, начинать решение нужно с одного и того же — сопоставления вершин графа и пунктов таблицы по <strong>степеням вершин</strong>.
+    </div>
+  `;
+  app.appendChild(types);
+
+  const degree = document.createElement('section');
+  degree.className = 'card';
+  degree.innerHTML = `
+    <h2 class="card-title">Степень вершины — главный инструмент</h2>
+    <p><strong>Степень вершины</strong> — это количество рёбер, выходящих из неё. В таблице смежности степень вершины равна количеству звёздочек (или непустых ячеек) в её строке.</p>
+    
+    <h3>Пример таблицы со звёздочками</h3>
+    <div class="example">
+      <div class="example-title">Таблица смежности</div>
+      <table class="adj-table" style="max-width:280px;">
+        <tr><th></th><th>П1</th><th>П2</th><th>П3</th></tr>
+        <tr><th>П1</th><td class="empty-cell"></td><td class="marked">*</td><td class="marked">*</td></tr>
+        <tr><th>П2</th><td class="marked">*</td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+        <tr><th>П3</th><td class="marked">*</td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+      </table>
+    </div>
+    <p>Степени: П1 = 2, П2 = 1, П3 = 1.</p>
+
+    <h3>Пример таблицы с числами</h3>
+    <div class="example">
+      <div class="example-title">Таблица длин дорог (в км)</div>
+      <table class="adj-table" style="max-width:280px;">
+        <tr><th></th><th>П1</th><th>П2</th><th>П3</th></tr>
+        <tr><th>П1</th><td class="empty-cell"></td><td class="marked">10</td><td class="marked">15</td></tr>
+        <tr><th>П2</th><td class="marked">10</td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+        <tr><th>П3</th><td class="marked">15</td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+      </table>
+    </div>
+    <p>Степени считаются так же: П1 = 2, П2 = 1, П3 = 1. Числа в ячейках — это длины дорог.</p>
+    
+    <div class="note note-warn">
+      <strong>Лайфхак:</strong> начинайте сопоставление с вершин <strong>уникальной степени</strong> — тех, чья степень встречается только один раз и в таблице, и на графе. Это сразу даёт точку опоры.
+    </div>
+  `;
+  app.appendChild(degree);
+
+  const algo = document.createElement('section');
+  algo.className = 'card';
+  algo.innerHTML = `
+    <h2 class="card-title">Алгоритм решения задания 1</h2>
+    <ol>
+      <li><strong>Посчитайте степени</strong> всех вершин в таблице (количество непустых ячеек в строке)</li>
+      <li><strong>Посчитайте степени</strong> всех вершин на графе (количество линий из каждой буквы)</li>
+      <li><strong>Найдите уникальные степени</strong> — вершины, чья степень встречается по одному разу. Сопоставьте их</li>
+      <li><strong>Используйте связи</strong>: если вы уже знаете, что П3 = В, посмотрите, с какими пунктами связан П3 в таблице, и найдите соответствующие буквы на графе</li>
+      <li><strong>Для заданий с числами</strong>: после сопоставления найдите нужную ячейку в таблице и прочитайте число</li>
+      <li><strong>Запишите ответ</strong> в требуемом формате (число или последовательность букв/цифр)</li>
+    </ol>
+  `;
+  app.appendChild(algo);
+
+  const example = document.createElement('section');
+  example.className = 'card';
+  example.innerHTML = `
+    <h2 class="card-title">Разбор примера (Тип А — с числами)</h2>
+    <p>Рассмотрим задание: найти длину дороги из пункта Б в пункт Е.</p>
+    
+    <h3>Шаг 1. Считаем степени в таблице</h3>
+    <div class="example">
+      <table class="adj-table" style="max-width:320px;">
+        <tr><th></th><th>П1</th><th>П2</th><th>П3</th><th>П4</th><th>П5</th></tr>
+        <tr><th>П1</th><td class="empty-cell"></td><td class="marked">10</td><td class="marked">15</td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+        <tr><th>П2</th><td class="marked">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="marked">8</td><td class="empty-cell"></td></tr>
+        <tr><th>П3</th><td class="marked">15</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="marked">20</td></tr>
+        <tr><th>П4</th><td class="empty-cell"></td><td class="marked">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="marked">12</td></tr>
+        <tr><th>П5</th><td class="empty-cell"></td><td class="empty-cell"></td><td class="marked">20</td><td class="marked">12</td><td class="empty-cell"></td></tr>
+      </table>
+    </div>
+    <p>Степени: П1=2, П2=2, П3=2, П4=2, П5=2. Все одинаковые — нужен другой подход.</p>
+    
+    <h3>Шаг 2. Смотрим на граф</h3>
+    <div class="example">
+      <div class="graph-container">
+        <img src="images/1_13399.svg" alt="Граф дорог" onerror="this.style.display='none'; this.parentElement.innerHTML='<p style=\\'color:var(--text-muted);font-size:13px;\\'>Граф не загружен. Поместите файл 1_13399.svg в папку images/</p>'">
+      </div>
+    </div>
+    
+    <h3>Шаг 3. Сопоставление по уникальным связям</h3>
+    <p>Ищем вершину с уникальной степенью или уникальной структурой связей. Например, если из В идёт единственная дорога — ищем пункт в таблице, из которого тоже идёт единственная дорога.</p>
+    
+    <div class="note note-success">
+      <strong>После сопоставления:</strong> находим нужную ячейку в таблице и читаем ответ. В данном примере ответ — <strong>13</strong>.
+    </div>
+  `;
+  app.appendChild(example);
+
+  const mistakes = document.createElement('section');
+  mistakes.className = 'card';
+  mistakes.innerHTML = `
+    <h2 class="card-title">Типичные ошибки</h2>
+    <ul>
+      <li> Путать строки и столбцы таблицы (они симметричны, но лучше проверять)</li>
+      <li>❌ Забывать, что ответ нужно писать <strong>по порядку П1, П2, П3...</strong>, а не по алфавиту</li>
+      <li> Писать ответ с пробелами или знаками препинания, когда просят без них</li>
+      <li>❌ Не проверять ответ: после сопоставления пройдитесь по всем связям ещё раз</li>
+      <li>❌ В заданиях с числами — брать число не из той ячейки (перепутать строку/столбец)</li>
+      <li>❌ В заданиях на сумму — забывать сложить все нужные дороги</li>
+    </ul>
+    <div class="note">
+      <strong>Совет:</strong> если застряли — начните с вершины максимальной или минимальной степени. Они обычно уникальны и дают быстрый старт.
+    </div>
+  `;
+  app.appendChild(mistakes);
+}
+
+
+/* =========================================================
+   РЕНДЕРИНГ: ПРАКТИКА 1 (мгновенная проверка)
+   ========================================================= */
+function renderPractice1() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+
+  const head = document.createElement('div');
+  head.className = 'section-head';
+  head.innerHTML = `
+    <div>
+      <h2 class="section-title">Практика 1: мгновенная проверка</h2>
+      <p class="section-desc">10 заданий. После каждого можно сразу проверить ответ и посмотреть решение.</p>
+    </div>
+  `;
+  app.appendChild(head);
+
+  const tasksBlock = document.createElement('div');
+  tasksBlock.id = 'practice1-tasks';
+  app.appendChild(tasksBlock);
+
+  TASKS.slice(0, 10).forEach((task, idx) => {
+    const taskEl = createTaskElement(task, idx + 1, 'practice1');
+    tasksBlock.appendChild(taskEl);
+  });
+}
+
+
+/* =========================================================
+   РЕНДЕРИНГ: ПРАКТИКА 2 (проверка в конце)
+   ========================================================= */
+function renderPractice2() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+
+  const head = document.createElement('div');
+  head.className = 'section-head';
+  head.innerHTML = `
+    <div>
+      <h2 class="section-title">Практика 2: проверка в конце</h2>
+      <p class="section-desc">10 заданий. Ответы вводите сразу, но проверка — одной кнопкой в конце.</p>
+    </div>
+  `;
+  app.appendChild(head);
+
+  const tasksBlock = document.createElement('div');
+  tasksBlock.id = 'practice2-tasks';
+  app.appendChild(tasksBlock);
+
+  TASKS.slice(10, 20).forEach((task, idx) => {
+    const taskEl = createTaskElement(task, idx + 11, 'practice2');
+    tasksBlock.appendChild(taskEl);
+  });
+
+  const checkBtn = document.createElement('button');
+  checkBtn.className = 'btn btn-primary btn-block';
+  checkBtn.textContent = '✓ Проверить все ответы';
+  checkBtn.style.marginTop = '8px';
+  checkBtn.addEventListener('click', checkAllPractice2);
+  app.appendChild(checkBtn);
+
+  const resultsPanel = document.createElement('div');
+  resultsPanel.className = 'results-panel';
+  resultsPanel.id = 'results-panel-2';
+  app.appendChild(resultsPanel);
+}
+
+
+/* =========================================================
+   СОЗДАНИЕ ЭЛЕМЕНТА ЗАДАНИЯ
+   ========================================================= */
+function createTaskElement(task, num, mode) {
+  const taskEl = document.createElement('article');
+  taskEl.className = 'task';
+  taskEl.dataset.taskId = task.id;
+
+  const header = document.createElement('div');
+  header.className = 'task-header';
+
+  const numEl = document.createElement('span');
+  numEl.className = 'task-num';
+  const typeBadge = task.type === 'numbers' 
+    ? '<span class="type-badge numbers">числа</span>' 
+    : '<span class="type-badge stars">звёздочки</span>';
+  numEl.innerHTML = 'Задание ' + num + ' №' + task.num + typeBadge;
+  header.appendChild(numEl);
+
+  const linkEl = document.createElement('a');
+  linkEl.className = 'task-link';
+  linkEl.href = 'https://inf-ege.sdamgia.ru/problem?id=' + task.num;
+  linkEl.target = '_blank';
+  linkEl.rel = 'noopener';
+  linkEl.textContent = 'Оригинал ↗';
+  header.appendChild(linkEl);
+
+  taskEl.appendChild(header);
+
+  const textEl = document.createElement('p');
+  textEl.className = 'task-text';
+  textEl.textContent = task.text;
+  taskEl.appendChild(textEl);
+
+  const visual = document.createElement('div');
+  visual.className = 'task-visual';
+
+  const tableWrap = document.createElement('div');
+  const table = document.createElement('table');
+  table.className = 'adj-table';
+
+  const thead = document.createElement('tr');
+  const th0 = document.createElement('th');
+  thead.appendChild(th0);
+  task.tableLabels.forEach(l => {
+    const th = document.createElement('th');
+    th.textContent = l;
+    thead.appendChild(th);
+  });
+  table.appendChild(thead);
+
+  task.table.forEach((row, i) => {
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
+    th.textContent = task.tableLabels[i];
+    tr.appendChild(th);
+    row.forEach((cell) => {
+      const td = document.createElement('td');
+      if (cell === null || cell === '') {
+        td.className = 'empty-cell';
+        td.textContent = '';
+      } else {
+        td.className = 'marked';
+        td.textContent = String(cell);
+      }
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
+  tableWrap.appendChild(table);
+  visual.appendChild(tableWrap);
+
+  const graphWrap = document.createElement('div');
+  graphWrap.className = 'graph-container';
+  const img = document.createElement('img');
+  img.src = task.svg;
+  img.alt = 'Граф дорог для задания ' + num;
+  img.onerror = function() {
+    this.style.display = 'none';
+    const err = document.createElement('p');
+    err.style.cssText = 'color:var(--text-muted);font-size:13px;text-align:center;';
+    err.textContent = 'Граф не загружен. Поместите файл ' + task.svg.split('/').pop() + ' в папку images/';
+    this.parentElement.appendChild(err);
+  };
+  graphWrap.appendChild(img);
+  visual.appendChild(graphWrap);
+
+  taskEl.appendChild(visual);
+
+  const inputGroup = document.createElement('div');
+  inputGroup.className = 'input-group';
+
+  const label = document.createElement('label');
+  label.className = 'input-label';
+  label.htmlFor = 'input-' + mode + '-' + task.id;
+  if (task.type === 'numbers') {
+    label.textContent = 'Ваш ответ (целое число):';
+  } else {
+    label.textContent = 'Ваш ответ (последовательность букв/цифр без пробелов):';
+  }
+  inputGroup.appendChild(label);
+
+  const input = document.createElement('input');
+  input.className = 'input';
+  input.id = 'input-' + mode + '-' + task.id;
+  input.type = 'text';
+  input.autocomplete = 'off';
+  if (task.type === 'numbers') {
+    input.placeholder = 'Например: 13';
+    input.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      updateAnswer(mode, task.id, e.target.value);
+    });
+  } else {
+    input.placeholder = 'Например: АБВГДЕ';
+    input.addEventListener('input', (e) => {
+      e.target.value = e.target.value.toUpperCase().replace(/[^А-ЯЁ0-9]/g, '');
+      updateAnswer(mode, task.id, e.target.value);
+    });
+  }
+  inputGroup.appendChild(input);
+  taskEl.appendChild(inputGroup);
+
+  const btnRow = document.createElement('div');
+  btnRow.className = 'btn-row';
+
+  if (mode === 'practice1') {
+    const checkBtn = document.createElement('button');
+    checkBtn.className = 'btn btn-primary';
+    checkBtn.textContent = 'Проверить';
+    checkBtn.addEventListener('click', () => checkTask1(task.id));
+    btnRow.appendChild(checkBtn);
+
+    const solBtn = document.createElement('button');
+    solBtn.className = 'btn btn-secondary';
+    solBtn.textContent = 'Показать решение';
+    solBtn.addEventListener('click', () => toggleSolution1(task.id));
+    btnRow.appendChild(solBtn);
+  }
+
+  taskEl.appendChild(btnRow);
+
+  const feedback = document.createElement('div');
+  feedback.className = 'feedback';
+  feedback.id = 'feedback-' + task.id;
+  taskEl.appendChild(feedback);
+
+  const solution = document.createElement('div');
+  solution.className = 'solution';
+  solution.id = 'solution-' + task.id;
+  const solTitle = document.createElement('div');
+  solTitle.className = 'solution-title';
+  solTitle.textContent = 'Решение:';
+  solution.appendChild(solTitle);
+  const solText = document.createElement('p');
+  solText.style.whiteSpace = 'pre-line';
+  solText.textContent = task.solution;
+  solution.appendChild(solText);
+  const solAnswer = document.createElement('p');
+  solAnswer.style.marginTop = '10px';
+  solAnswer.style.fontWeight = '600';
+  solAnswer.style.color = 'var(--text)';
+  solAnswer.textContent = 'Ответ: ' + task.answer;
+  solution.appendChild(solAnswer);
+  taskEl.appendChild(solution);
+
+  return taskEl;
+}
+
+function updateAnswer(mode, taskId, value) {
+  if (mode === 'practice1') {
+    state.answers1[taskId] = value;
+    state.checked1[taskId] = false;
+    state.showSolution1[taskId] = false;
+    const input = document.getElementById('input-practice1-' + taskId);
+    const fb = document.getElementById('feedback-' + taskId);
+    const sol = document.getElementById('solution-' + taskId);
+    if (input) input.classList.remove('correct', 'wrong');
+    if (fb) fb.classList.remove('show');
+    if (sol) sol.classList.remove('show');
+  } else {
+    state.answers2[taskId] = value;
+  }
+}
+
+
+/* =========================================================
+   ПРОВЕРКА: ПРАКТИКА 1
+   ========================================================= */
+function checkTask1(taskId) {
+  const task = TASKS.find(t => t.id === taskId);
+  if (!task) return;
+
+  const input = document.getElementById('input-practice1-' + taskId);
+  const feedback = document.getElementById('feedback-' + taskId);
+  if (!input || !feedback) return;
+
+  const userAnswer = (state.answers1[taskId] || '').trim().toUpperCase().replace(/\s+/g, '');
+
+  if (!userAnswer) {
+    feedback.className = 'feedback show error';
+    feedback.textContent = 'Введите ответ перед проверкой.';
+    input.classList.remove('correct');
+    input.classList.add('wrong');
+    return;
+  }
+
+  state.checked1[taskId] = true;
+
+  if (userAnswer === task.answer.toUpperCase()) {
+    feedback.className = 'feedback show success';
+    feedback.textContent = '✓ Верно! Отличная работа.';
+    input.classList.remove('wrong');
+    input.classList.add('correct');
+  } else {
+    feedback.className = 'feedback show error';
+    feedback.textContent = '✗ Неверно. Правильный ответ: ' + task.answer + '. Посмотрите решение.';
+    input.classList.remove('correct');
+    input.classList.add('wrong');
+  }
+}
+
+function toggleSolution1(taskId) {
+  state.showSolution1[taskId] = !state.showSolution1[taskId];
+  const sol = document.getElementById('solution-' + taskId);
+  if (sol) {
+    sol.classList.toggle('show', state.showSolution1[taskId]);
+  }
+}
+
+
+/* =========================================================
+   ПРОВЕРКА: ПРАКТИКА 2
+   ========================================================= */
+function checkAllPractice2() {
+  const results = [];
+  let correct = 0;
+
+  TASKS.slice(10, 20).forEach((task, idx) => {
+    const num = idx + 11;
+    const userAnswer = (state.answers2[task.id] || '').trim().toUpperCase().replace(/\s+/g, '');
+    const isCorrect = userAnswer === task.answer.toUpperCase();
+    if (isCorrect) correct++;
+    results.push({
+      num: num,
+      task: task,
+      userAnswer: userAnswer || '—',
+      correctAnswer: task.answer,
+      isCorrect: isCorrect
+    });
+  });
+
+  state.results2 = results;
+  renderResults2(results, correct);
+}
+
+function renderResults2(results, correct) {
+  const panel = document.getElementById('results-panel-2');
+  if (!panel) return;
+
+  panel.innerHTML = '';
+  panel.classList.add('show');
+
+  const score = document.createElement('div');
+  score.className = 'results-score';
+  score.innerHTML = `
+    <div class="results-score-num">${correct} / 10</div>
+    <div class="results-score-label">правильных ответов</div>
+  `;
+  panel.appendChild(score);
+
+  const progress = document.createElement('div');
+  progress.className = 'progress-bar';
+  const fill = document.createElement('div');
+  fill.className = 'progress-fill';
+  fill.style.width = (correct * 10) + '%';
+  progress.appendChild(fill);
+  panel.appendChild(progress);
+
+  results.forEach(r => {
+    const item = document.createElement('div');
+    item.className = 'result-item ' + (r.isCorrect ? 'correct' : 'wrong');
+
+    const head = document.createElement('div');
+    head.className = 'result-item-head';
+
+    const numEl = document.createElement('span');
+    numEl.className = 'result-item-num';
+    numEl.textContent = 'Задание ' + r.num + ' №' + r.task.num;
+    head.appendChild(numEl);
+
+    const status = document.createElement('span');
+    status.className = 'result-item-status ' + (r.isCorrect ? 'correct' : 'wrong');
+    status.textContent = r.isCorrect ? 'Верно' : 'Неверно';
+    head.appendChild(status);
+
+    item.appendChild(head);
+
+    const answers = document.createElement('div');
+    answers.className = 'result-item-answers';
+    answers.innerHTML = '<strong>Ваш ответ:</strong> ' + escapeHtml(r.userAnswer) + ' · <strong>Правильный:</strong> ' + escapeHtml(r.correctAnswer);
+    item.appendChild(answers);
+
+    if (!r.isCorrect) {
+      const sol = document.createElement('div');
+      sol.style.cssText = 'margin-top:10px;font-size:13px;color:var(--text-soft);line-height:1.6;white-space:pre-line;';
+      sol.textContent = r.task.solution;
+      item.appendChild(sol);
+    }
+
+    panel.appendChild(item);
+  });
+
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+
+/* =========================================================
+   ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+   ========================================================= */
+function switchTab(tabName) {
+  state.currentTab = tabName;
+
+  document.querySelectorAll('.tab').forEach(t => {
+    const isActive = t.dataset.tab === tabName;
+    t.classList.toggle('active', isActive);
+    t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  });
+
+  if (tabName === 'theory') renderTheory();
+  else if (tabName === 'practice1') renderPractice1();
+  else if (tabName === 'practice2') renderPractice2();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+/* =========================================================
+   ИНИЦИАЛИЗАЦИЯ
+   ========================================================= */
+function init() {
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+
+  renderTheory();
+}
+
+init();
+</script>
+</body>
+</html>
