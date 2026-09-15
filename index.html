@@ -1003,9 +1003,9 @@ function createTaskElement(task, num, mode) {
   label.className = 'input-label';
   label.htmlFor = 'input-' + mode + '-' + task.id;
   if (task.type === 'numbers') {
-    label.textContent = 'Ваш ответ (целое число):';
+    label.textContent = 'Ваш ответ:';
   } else {
-    label.textContent = 'Ваш ответ (последовательность букв/цифр без пробелов):';
+    label.textContent = 'Ваш ответ:';
   }
   inputGroup.appendChild(label);
 
@@ -1020,13 +1020,13 @@ function createTaskElement(task, num, mode) {
   input.setAttribute('spellcheck', 'false');
   input.setAttribute('data-lpignore', 'true');
   if (task.type === 'numbers') {
-    input.placeholder = 'Например: 13';
+    input.placeholder = '...';
     input.addEventListener('input', (e) => {
       e.target.value = e.target.value.replace(/[^0-9]/g, '');
       updateAnswer(mode, task.id, e.target.value);
     });
   } else {
-    input.placeholder = 'Например: АБВГДЕ';
+    input.placeholder = '...';
     input.addEventListener('input', (e) => {
       e.target.value = e.target.value.toUpperCase().replace(/[^А-ЯЁ0-9]/g, '');
       updateAnswer(mode, task.id, e.target.value);
